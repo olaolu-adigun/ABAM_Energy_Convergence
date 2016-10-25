@@ -39,7 +39,7 @@ thr1  = 0;
 thr2  = 0;
 
 % Set the mode to ('Bipolar' or 'Binary'). Default mode is binary.
-mode = 'Binary';
+mode = 'Bipolar';
 %%
 
 %% Initialize the input vector randomly.  
@@ -117,6 +117,7 @@ end
 
 
 %% Save the output to result.txt
+%{
 fileID = fopen('result.txt','w');
 fprintf(fileID,'%6s %12s\n','ITERATION','ENERGY(E)');
 for i = 1:1:numel(E)
@@ -139,4 +140,5 @@ title('ENERGY PLOT');
 xlabel('Iterations');
 ylabel('Energy');
 
+%}
 end
