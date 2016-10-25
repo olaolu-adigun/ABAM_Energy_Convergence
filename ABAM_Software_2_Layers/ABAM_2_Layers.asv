@@ -1,4 +1,3 @@
-function [E] = ABAM_2_Layers()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                     ABAM Training (2-Layers)
 % 
@@ -24,8 +23,8 @@ function [E] = ABAM_2_Layers()
 
 %% Define the Neural Network
 % Number of neurons for each layer
-I  = 5 ; 
-K = 5;
+I  = 5; 
+K = 10;
 
 % Initialize the weights randomly
 % Set the range for thr weight
@@ -39,7 +38,7 @@ thr1  = 0;
 thr2  = 0;
 
 % Set the mode to ('Bipolar' or 'Binary'). Default mode is binary.
-mode = 'Binary';
+mode = 'Bipolar';
 %%
 
 %% Initialize the input vector randomly.  
@@ -50,8 +49,7 @@ count = 1;
 
 if (strcmp(mode,'Bipolar'))
     ax = (2*(ox >= thr1))-1;
-    
-    while(count < 100)
+    while(count< 500)
         
         %--FORWARD PASS
         oy = W'*ax;
@@ -65,11 +63,11 @@ if (strcmp(mode,'Bipolar'))
         delW = zeros(size(W));
         for i = 1:1:size(W,1)
             for j = 1:1:size(W,2)
-               delW(i,j) = 0.1*(ax(i) + ay(j)); 
+               delW(i,j) = ax(i) + ay(j); 
             end
         end
+        W = W + 
         
-        W = W + delW;
         
         % Compute the Energy
         E(count) = - ax'*W*ay ;
@@ -82,26 +80,17 @@ if (strcmp(mode,'Bipolar'))
         end
     end
 else
-    ax = (ox >= thr1);
-    while( count < 100)
-        
-        %---FORWARD PASS
+    while( count < 500)
+        % FORWARD PASS
+        ax = (ox >= thr1);
+        % Update ay
         oy = W'*ax;
         ay = (oy >= thr2);
         
-        %---BACKWARD PASS
+        % BACKWARD PASS
+        % Update ax
         ox = W*ay;
         ax = (ox >= thr1);
-        
-        %---UPDATE WEIGHT
-        delW = zeros(size(W));
-        for i = 1:1:size(W,1)
-            for j = 1:1:size(W,2)
-               delW(i,j) = 0.1*(ax(i) + ay(j)); 
-            end
-        end
-        
-        W = W + delW;
         % Compute the Energy
         E(count) = - ax'*W*ay ;
         
@@ -134,9 +123,7 @@ fclose(fileID);
 
 % Plot the output
 figure(1);
-plot(E,'k-x');
+plot(E,'k-*');
 title('ENERGY PLOT');
 xlabel('Iterations');
 ylabel('Energy');
-
-end
