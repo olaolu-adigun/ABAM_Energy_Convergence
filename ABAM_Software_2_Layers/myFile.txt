@@ -1,0 +1,17 @@
+ITERATION    ENERGY(E)
+     1       -4.702
+     2       -4.702
+     3       -4.702
+
+ Input activation after convergence is:
+   1   0   0   1   1
+ 
+ Output activation after convergence is:
+   1   0   0   1
+ 
+ Weight W is:
+   1.384,  -1.271,   0.480,  -0.862
+  -0.385,  -1.441,   1.553,   0.208
+  -1.506,  -1.536,   0.157,   1.169
+   0.720,   0.886,  -1.593,   1.910
+   0.185,   0.227,  -1.957,   1.365
