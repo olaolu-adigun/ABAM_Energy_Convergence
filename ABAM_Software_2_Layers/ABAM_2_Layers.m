@@ -117,7 +117,7 @@ end
 
 
 %% Save the output to result.txt
-%{
+%
 fileID = fopen('result.txt','w');
 fprintf(fileID,'%6s %12s\n','ITERATION','ENERGY(E)');
 for i = 1:1:numel(E)

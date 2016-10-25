@@ -1,6 +1,6 @@
-P = zeros(10000,1);
+P = zeros(100000,1);
 
-for a = 1:1:10000
+for a = 1:1:100000
    E = ABAM_2_Layers();
    E = E(4:numel(E));
    P(a) = issorted(-E);
